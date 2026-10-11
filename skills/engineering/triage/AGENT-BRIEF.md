@@ -36,6 +36,10 @@ The agent needs to know when it's done. Every agent brief must have concrete, te
 
 State what is out of scope. This prevents the agent from gold-plating or making assumptions about adjacent features.
 
+### Suggested pickup
+
+End every brief with a **Suggested pickup**: the skill, model, and effort level a fresh session should start it with, plus one line of why. Size the model and effort to the work: a mechanical, well-specified change gets a smaller model at low effort; one heavy on judgement, ambiguity, or cross-cutting design gets the most capable model at high effort. Use the model names and effort levels the harness accepts (e.g. `sonnet`, `opus`; `low`, `medium`, `high`). A brief that builds or changes code names `/implement`, never `/tdd` on its own: `/implement` drives `/tdd` and closes with `/code-review`, so the review isn't skipped.
+
 ## Template
 
 ```markdown
@@ -65,6 +69,8 @@ Be specific about edge cases and error conditions.
 **Out of scope:**
 - Thing that should NOT be changed or addressed in this issue
 - Adjacent feature that might seem related but is separate
+
+**Suggested pickup:** `/implement` · `<model>` · `<effort>`: why this model and effort fit
 ```
 
 ## Examples
@@ -102,6 +108,8 @@ and append "..." to indicate truncation.
 **Out of scope:**
 - Changing the 1024 char limit itself
 - Multi-line description support
+
+**Suggested pickup:** `/implement` · `sonnet` · `low`: one well-bounded function with crisp criteria
 ```
 
 ### Good agent brief (enhancement)
@@ -143,6 +151,8 @@ checked for matches.
 - Automated matching (human confirms the match)
 - Reopening previously rejected features
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
+
+**Suggested pickup:** `/implement` · `sonnet` · `medium`: a new file format plus a matching step in an existing workflow
 ```
 
 ### Good agent brief (PR)
@@ -180,6 +190,8 @@ is untouched when the flag is absent.
 **Out of scope:**
 - Adding `--json` to any other command
 - Changing the JSON shape of the success payload the PR already defined
+
+**Suggested pickup:** `/implement` · `sonnet` · `low`: closing two named gaps in a diff that already works
 ```
 
 ### Bad agent brief
@@ -205,3 +217,4 @@ This is bad because:
 - No acceptance criteria
 - No scope boundaries
 - No description of current vs desired behavior
+- No suggested pickup

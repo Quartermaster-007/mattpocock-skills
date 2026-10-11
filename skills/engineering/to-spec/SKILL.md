@@ -72,4 +72,8 @@ A description of the things that are out of scope for this spec.
 
 Any further notes about the feature.
 
+## Suggested pickup
+
+The skill, model, and effort level a fresh session should start this spec with, plus one line of why: `/to-tickets` when the build spans several sessions, `/implement` when it fits one. Never `/tdd` on its own: `/implement` drives `/tdd` and closes with `/code-review`, so the review isn't skipped. Size the model and effort to the work: well-specified and mechanical gets a smaller model at low effort; heavy on judgement or cross-cutting design gets the most capable model at high effort. Use the model names and effort levels the harness accepts (e.g. `sonnet`, `opus`; `low`, `medium`, `high`).
+
 </spec-template>

@@ -44,6 +44,8 @@ These are canonical role names. The actual label strings used in the issue track
 
 State transitions: an unlabeled issue normally goes to `needs-triage` first; from there it moves to `needs-info`, `ready-for-agent`, `ready-for-human`, or `wontfix`. `needs-info` returns to `needs-triage` once the reporter replies. The maintainer can override at any time; flag transitions that look unusual and ask before proceeding.
 
+The state roles above are triage labels, separate from the tracker's own **workflow state** (the board column or `State` field: To Do, Doing, Done, and so on). Ignore the workflow state entirely: don't read readiness into it, don't flag it as conflicting with a triage role, and don't change it (beyond closing a `wontfix`). A maintainer often moves a ticket to Doing before triaging it; that means they've started on it, not that it's ready for an agent.
+
 ## Invocation
 
 The maintainer invokes `/triage` and describes what they want in natural language. Interpret the request and act. Examples:

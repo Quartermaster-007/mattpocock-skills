@@ -76,6 +76,9 @@ A very large spec can outgrow what a tracker issue serves back cleanly, and ther
 **The acceptance criteria graded nothing: some passed before any work was done.**
 The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that can only be satisfied by work another ticket owns, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it (a slice that delivers behaviour which didn't exist before is red at the base commit by construction), but the check is worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
 
+**What's the "Suggested pickup" line at the bottom of each ticket?**
+How a fresh session should start that ticket: the skill, a model, and an effort level, with one line of why. A mechanical slice gets a smaller model at low effort; a ticket heavy on judgement gets the most capable model at high effort. A build ticket always names [implement](https://aihero.dev/skills-implement), never [tdd](https://aihero.dev/skills-tdd) on its own, because `implement` drives `tdd` and then closes with [code-review](https://aihero.dev/skills-code-review); a ticket that says `tdd` is a ticket whose review gets skipped.
+
 **The tickets are published. How do I actually run them?**
 The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. One ticket per fresh context, cleared between them. Be aware that [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so the ticket's state is yours to update.
 
@@ -87,6 +90,7 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 - Nothing in a ticket body is a file path or a line number, except a snippet a prototype produced.
 - Each ticket reads like something a fresh session could finish without you in the room.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
+- Every ticket ends with a suggested pickup naming `/implement`, a model, and an effort level, and the model and effort track how hard the ticket is.
 
 ## Where it fits
 

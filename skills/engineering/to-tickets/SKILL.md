@@ -66,6 +66,8 @@ Work the **frontier**: any ticket whose blockers are all done. For a purely line
 
 Do NOT close or modify any parent issue.
 
+End every ticket with a **Suggested pickup**: the skill, model, and effort level a fresh session should start it with, plus one line of why. Size the model and effort to the ticket: a mechanical, well-specified slice gets a smaller model at low effort; one heavy on judgement, ambiguity, or cross-cutting design gets the most capable model at high effort. Use the model names and effort levels the harness accepts (e.g. `sonnet`, `opus`; `low`, `medium`, `high`). A ticket that builds code names `/implement`, never `/tdd` on its own: `/implement` drives `/tdd` and closes with `/code-review`, so the review isn't skipped.
+
 <local-ticket-template>
 
 # <NN>: <Ticket title>
@@ -78,6 +80,8 @@ Do NOT close or modify any parent issue.
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
+
+**Suggested pickup:** `/implement` · `<model>` · `<effort>`: why this model and effort fit
 
 </local-ticket-template>
 
@@ -99,6 +103,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 ## Blocked by
 
 - A reference to each blocking ticket, or "None (can start immediately)".
+
+## Suggested pickup
+
+`/implement` · `<model>` · `<effort>`: why this model and effort fit
 
 </issue-template>
 

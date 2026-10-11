@@ -60,7 +60,13 @@ Each ticket is a **child issue** of the map; the tracker's issue id is its ident
 ## Question
 
 <the decision or investigation this ticket resolves>
+
+## Suggested pickup
+
+<skill> · <model> · <effort>: <one line of why>
 ```
+
+The **suggested pickup** names how a fresh session should start the ticket: `/wayfinder` on the map, naming this ticket, for grilling, prototype, and task tickets; `/research` for research tickets. Size the model and effort to the question: a fact lookup or mechanical task gets a smaller model at low effort; a decision heavy on judgement or ambiguity gets the most capable model at high effort. Use the model names and effort levels the harness accepts (e.g. `sonnet`, `opus`; `low`, `medium`, `high`). If execution is carried into the map (see [Plan, don't do](#plan-dont-do)) and a ticket builds code, name `/implement`, never `/tdd` on its own: `/implement` drives `/tdd` and closes with `/code-review`.
 
 Each ticket carries a `wayfinder:<type>` label, one of `research`, `prototype`, `grilling`, `task` (see [Ticket Types](#ticket-types)).
 

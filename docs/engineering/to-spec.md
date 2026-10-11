@@ -69,6 +69,7 @@ Very large specs can outgrow what a tracker issue will serve back cleanly, and t
 - It comes back in your project's nouns, not generic product-management boilerplate.
 - Every decision in it is one you can remember making. Nothing was invented to fill a section.
 - The out-of-scope section has real things in it: the things you refused are usually the most useful lines on the page.
+- It ends with a suggested pickup: [to-tickets](https://aihero.dev/skills-to-tickets) or [implement](https://aihero.dev/skills-implement), never bare [tdd](https://aihero.dev/skills-tdd), with a model and an effort level sized to the work.
 
 ## Where it fits
 
