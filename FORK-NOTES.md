@@ -9,26 +9,17 @@ maintained so I can customize the skills and control when upstream changes land.
 
 ## How Claude Code loads this
 
-`~/.claude/settings.json` registers this fork as the `mattpocock` marketplace:
+The skills load through **symlinks**: `scripts/link-skills.sh` links every skill outside `deprecated/` and `misc/` into `~/.claude/skills` and `~/.agents/skills`, each entry pointing into this clone. Claude Code reads the clone directly, so **an edit here is live in the next skill invocation**, with no push or plugin update. Whatever branch this clone has checked out is what every session runs: switch back to `main` before leaving an experiment unmerged. Re-run the script after adding, removing, or renaming a skill.
+
+`~/.claude/settings.json` still registers this fork as the `mattpocock` marketplace, but the plugin is **not enabled** (`"enabledPlugins": {}`), so the plugin cache plays no part:
 
 ```json
 "extraKnownMarketplaces": {
   "mattpocock": { "source": { "source": "github", "repo": "Quartermaster-007/mattpocock-skills" } }
-},
-"enabledPlugins": { "mattpocock-skills@mattpocock": true }
+}
 ```
 
-Claude Code clones this repo into its managed plugin cache. **Edits in this local
-clone don't take effect until pushed to the fork**, then run `/plugin marketplace
-update mattpocock` (or restart Claude Code).
-
-### Live editing without pushing
-
-To test local edits immediately, launch Claude Code with:
-
-```bash
-claude --plugin-dir ~/Projects/agents/mattpocock-skills
-```
+To load the plugin instead (for example on a machine without this clone), enable `"mattpocock-skills@mattpocock": true`. Edits then take effect only after a push and `/plugin marketplace update mattpocock`, so remove the symlinks then to keep one source per skill.
 
 ## Staying in sync with Matt
 

@@ -32,7 +32,7 @@ If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), the
 
 A run is five beats, in order:
 
-1. Read the ticket or spec and work out the seams.
+1. Read the ticket or spec, check its suggested pickup against the session, and work out the seams.
 2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
 3. Typecheck often, run single test files as it goes.
 4. Run the full test suite once, at the end.
@@ -47,6 +47,10 @@ The idea the skill runs on is the **seam**: the public boundary you observe beha
 The word "pre-agreed" is doing real work, and it is also the skill's weakest joint. Nothing inside `implement` agrees the seams. `tdd` is the skill that asks, and it refuses to write a test at an unconfirmed seam. So in practice the agreement happens either upstream in the spec, or in the first exchange of the run. If it happens nowhere, the precondition never fires and the run quietly becomes "just write the code". Naming the seams in the spec is what stops that.
 
 ## Common questions
+
+**The ticket suggests a different model than the one my session runs on.**
+
+Tickets from [to-tickets](https://aihero.dev/skills-to-tickets), [to-spec](https://aihero.dev/skills-to-spec), [triage](https://aihero.dev/skills-triage) and [wayfinder](https://aihero.dev/skills-wayfinder) end with a suggested pickup: the skill, [model](https://www.aihero.dev/ai-coding-dictionary/model) and [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level the ticket was sized for. A session can't switch its own model, so `implement` only compares. On a mismatch, or a model your harness doesn't offer, it says so in one line and asks whether to continue; restart with `/model` if you want the suggested one. With no pickup at all, it names the model and effort it runs on and carries on. It compares effort only when the session exposes it, because not every harness does.
 
 **It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
 
@@ -76,6 +80,7 @@ Probably the ticket is too big rather than the skill being misused. A run does c
 
 ## It's working if
 
+- Before any code, the session names the ticket's suggested pickup and whether this session matches it, or says the ticket has none.
 - The session opens by reading the ticket or spec and restating what it will build, rather than asking you what to build.
 - You can see an actual `/tdd` invocation in the trace, not just tests appearing in the diff.
 - Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end.

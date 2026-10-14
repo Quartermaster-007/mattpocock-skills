@@ -33,7 +33,19 @@ Whether a pull request exists at all is the tracker's call. If your tracker clos
 
 Implementers talk to the orchestrator through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer) (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries, which keeps each subagent's prompt small and the orchestrator's window free for the graph.
 
+## The pickup plan
+
+Before it creates the integration branch, the orchestrator decides which [model](https://www.aihero.dev/ai-coding-dictionary/model) and [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level every subagent runs on: one row per ticket, plus one each for exploration, merging and the review fixes. A ticket that ends with a suggested pickup, as tickets from [to-tickets](https://aihero.dev/skills-to-tickets) do, keeps its model and effort. A ticket without one gets a proposal sized the same way: mechanical, well-specified work gets a smaller model at low effort, and judgement-heavy or cross-cutting work gets the most capable model at high effort. Merging is mechanical.
+
+You see the plan, with the proposals marked, before anything is built. A model or effort you put in the invocation ("implementers high, mergers low") overrides it, and when that settles every row the run starts without asking. A pickup the harness can't honour, a model it doesn't offer or an effort it doesn't accept, comes back to you rather than quietly falling back to the orchestrator's own model.
+
+Without the plan every subagent inherits the orchestrator's model, so a five-line merge runs on the same model as the hardest ticket.
+
 ## Common questions
+
+**My spec spans two repos.**
+
+Each repo gets its own integration branch, all with the same name, and one PR per repo that you merge together. The orchestrator stays rooted in the repo you launched from and drives the other repos without changing directory, because the harness forks every isolated subagent from the session's working directory: a stray directory change sends the next subagent into the wrong repo. Worktree isolation only covers the launch repo, so the orchestrator creates the other repos' worktrees itself and hands implementers their paths. One repo owns each contract between them, and implementers on the other side read it from the owner's integration branch rather than restating it.
 
 **How is this different from running `/implement` on each ticket myself?**
 
@@ -69,6 +81,8 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 
 ## It's working if
 
+- The run opens with a pickup plan, a model and effort per subagent, and the subagents then run on it rather than all on the orchestrator's model.
+- On a multi-repo spec, every isolated subagent lands in the launch repo, and each other repo's work arrives on its own integration branch.
 - Several implementers are running at once whenever the graph allows, not one after another.
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
