@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# check-upstream.sh — report how far this fork is behind mattpocock/skills.
+# check-upstream.sh: report how far this fork is behind mattpocock/skills.
 #
 # Usage:
 #   ./check-upstream.sh          # show ahead/behind counts + new upstream commits
@@ -35,7 +35,7 @@ if [ "${AHEAD}" -gt 0 ]; then
   echo "New upstream commits you don't have yet:"
   git --no-pager log --oneline --no-decorate "HEAD..${UPSTREAM_BRANCH}"
   echo
-  # Surface changeset entries — Matt's human-readable release notes.
+  # Surface changeset entries, which are Matt's human-readable release notes.
   if git --no-pager diff --name-only "HEAD..${UPSTREAM_BRANCH}" | grep -q '^\.changeset/'; then
     echo "Changeset notes added upstream (release-worthy changes):"
     git --no-pager diff "HEAD..${UPSTREAM_BRANCH}" -- '.changeset/*.md' | sed -n 's/^+//p' | grep -v '^++' || true
