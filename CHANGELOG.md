@@ -1,5 +1,30 @@
 # mattpocock-skills
 
+## 1.4.0
+
+### Minor Changes
+
+- [`e15ea59`](https://github.com/mattpocock/skills/commit/e15ea59601ce0b0008593982db4f416d885e75c6) Thanks [@Quartermaster-007](https://github.com/Quartermaster-007)! - `implement` and `implement-spec` now act on a ticket's suggested pickup, and `implement-spec` handles specs that span several repos.
+
+  - `implement` checks the ticket's **Suggested pickup** against the session's model and effort before building: it carries on when they match, asks whether to continue on a mismatch or a model the harness doesn't offer, and names its own model and effort when the ticket has no pickup.
+  - `implement-spec` builds a **pickup plan** before creating the integration branch: one model and effort per ticket from its pickup, a proposal where a ticket has none, and rows for the exploration, merger and review-fix subagents. Arguments override the plan; every subagent then runs on its row instead of inheriting the orchestrator's model.
+  - `implement-spec`'s merger pushes only on a green full suite and strips `# Conflicts:` lines from its merge commit.
+  - `implement-spec` gains `MULTI-REPO.md`: one integration branch per repo, the orchestrator stays rooted in the launch repo, it creates the other repos' worktrees itself, and one repo owns each cross-repo contract.
+
+- [`ef06737`](https://github.com/mattpocock/skills/commit/ef067375ac3c8e4244121d2acdfc4e6291ab892c) Thanks [@Quartermaster-007](https://github.com/Quartermaster-007)! - Tickets now carry a suggested pickup, `handoff` writes to the ticket or the Desktop, and `triage` ignores the tracker's workflow state.
+
+  - `to-spec`, `to-tickets`, `triage` (agent briefs) and `wayfinder` end every ticket they publish with a **Suggested pickup**: the skill, model, and effort level a fresh session should start it with. A ticket that builds code names `/implement`, never bare `/tdd`, so `/code-review` always runs.
+  - `handoff` posts the handoff on the relevant ticket, or saves it to the Desktop when there is none, instead of the OS temp directory. A ticket keeps only its newest handoff: earlier ones are deleted.
+  - `triage` no longer reads readiness into, flags, or changes the tracker's own workflow state (To Do, Doing, Done), which is separate from its triage labels.
+
+### Patch Changes
+
+- [#1363](https://github.com/mattpocock/skills/pull/1363) [`5ae4816`](https://github.com/mattpocock/skills/commit/5ae481693d13b37d4d2c2c92d0b66d299c93e695) Thanks [@mattpocock](https://github.com/mattpocock)! - `chief-of-staff` now looks for a shared wiki before starting its own. It also runs `retro` on about one in five of its subagents' sessions, the ones where something went wrong first, and acts on the findings itself, and runs `to-spec`, `to-tickets` and `implement-spec` for large chunks of work, reading each skill by relative path so they can stay user-invoked.
+
+- [#1342](https://github.com/mattpocock/skills/pull/1342) [`a496f55`](https://github.com/mattpocock/skills/commit/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa) Thanks [@mattpocock](https://github.com/mattpocock)! - `implement-spec` now uses a fresh implementer subagent for each ticket and for the code-review fixes, instead of reusing an earlier implementer.
+
+- [#1316](https://github.com/mattpocock/skills/pull/1316) [`4ae2317`](https://github.com/mattpocock/skills/commit/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d) Thanks [@mattpocock](https://github.com/mattpocock)! - Add `software-factory`, an in-progress user-invoked reference skill: a glossary for designing a software factory (tasks, runs, runners, triggers, and the services they plug into), example tasks grouped by the problem they solve, surveys of the products that fill each slot (ticket trackers, git hosts, runners, observability platforms), and the questions that finish a design. Call it alongside a grilling session.
+
 ## 1.3.2
 
 ### Patch Changes
